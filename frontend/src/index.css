@@ -18,13 +18,38 @@ code {
     padding: 0;
     box-sizing: border-box;
 }
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 
 .header-bar {
     background: white;
+    position: relative;
+    z-index: 1;
 }
 .account-icon {
     color: #444;
     font-size: 30px;
+}
+.dropdown-content {
+    position: absolute;
+    right: 10px;
+    top: -100px;
+    width: 100px;
+    background: white;
+    transition: top .5s;
+}
+.dropdown-content hr {
+    margin: 0;
+}
+.dropdown-content h5 {
+    margin: 10px;
 }
 .sidebar-label {
     font-size: 11px;
@@ -46,6 +71,44 @@ code {
     border-radius: 10px;
     padding: 2px;
 }
+.sidebar-links:hover {
+    background: #222;
+}
 .sidebar-links.active {
     background: #EA5179;
+}
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-size: cover;
+}
+.form {
+    position: relative;
+    width: 500px;
+    padding: 50px;
+}
+.form .screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #ddd;
+    opacity: 0.3;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+}
+.form h3 {
+    margin: 0;
+    position: relative;
+}
+.form form {
+    position: relative;
+}
+.login-logo {
+    position: absolute;
+    height: 80px;
+    top: 30px;
+    left: 30px;
 }

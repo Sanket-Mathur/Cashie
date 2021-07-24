@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import Header from '../Components/Header';
 import Sidebar from '../Components/Sidebar';
 import Home from '../Components/Home';
@@ -14,24 +14,26 @@ function Dashboard(props) {
     const [active, setActive] = useState('1');
 
     return (
-        <div className="dashboard">
-            <div className="side-wrap">
-                <Sidebar id={active} setActive={setActive} {...props} />
-            </div>
-            <div className="content">
-                <Header className="header-bar" />
-                <div className="main-area">
-                    <Switch>
-                        <Route exact path={`${props.match.path}`} component={Home} />
-                        <Route exact path={`${props.match.path}/user`} component={User} />
-                        <Route exact path={`${props.match.path}/category`} component={Category} />
-                        <Route exact path={`${props.match.path}/product`} component={Product} />
-                        <Route exact path={`${props.match.path}/transaction`} component={Transaction} />
-                        <Route exact path={`${props.match.path}/report`} component={Report} />
-                    </Switch>
+        <Fragment>
+            <div className="dashboard">
+                <div className="side-wrap">
+                    <Sidebar id={active} setActive={setActive} {...props} />
+                </div>
+                <div className="content">
+                    <Header className="header-bar" />
+                    <div className="main-area">
+                        <Switch>
+                            <Route exact path={`${props.match.path}`} component={Home} />
+                            <Route exact path={`${props.match.path}/user`} component={User} />
+                            <Route exact path={`${props.match.path}/category`} component={Category} />
+                            <Route exact path={`${props.match.path}/product`} component={Product} />
+                            <Route exact path={`${props.match.path}/transaction`} component={Transaction} />
+                            <Route exact path={`${props.match.path}/report`} component={Report} />
+                        </Switch>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
 
