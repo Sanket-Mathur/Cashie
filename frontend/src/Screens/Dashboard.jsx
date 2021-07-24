@@ -20,7 +20,7 @@ function Dashboard(props) {
                     <Sidebar id={active} setActive={setActive} {...props} />
                 </div>
                 <div className="content">
-                    <Header className="header-bar" />
+                    <Header className="header-bar" {...props} />
                     <div className="main-area">
                         <Switch>
                             <Route exact path={`${props.match.path}`} component={Home} />
