@@ -8,8 +8,9 @@ import Button from "@material-ui/core/Button";
 import Alert from '@material-ui/lab/Alert';
 import Joi from 'joi-browser';
 import Cookies from 'js-cookie';
-import loginBackground from '../Images/bg.jpg';
+import loginBackground from '../Images/login-background.jpg';
 import logo from '../Images/logo.png';
+import loading from '../Images/loading.gif';
 
 function Login(props) {
     const [formData, setFormData] = useState({
@@ -49,7 +50,13 @@ function Login(props) {
             setErrors(validation.error.details);
             return;
         }
+
+        
+
         async function attemptLogin() {
+            let gif = document.getElementById('loading-gif');
+            gif.style.visibility = 'visible';
+
             let result = await fetch(
                 "https://cashie-backend.herokuapp.com/api/auth/login",
                 {
@@ -71,6 +78,7 @@ function Login(props) {
             } else {
                 setErrors([{ message: "Authentication Failed" }]);
             }
+            gif.style.visibility = 'hidden';
         }
         attemptLogin();
     };
@@ -90,7 +98,10 @@ function Login(props) {
             <div className="login-page" style={{backgroundImage: `url(${loginBackground})`}}>
                 <div className="form text-start">
                     <div className="screen"></div>
-                    <h2>Cachie</h2>
+                    <div className="login-title">
+                        <h2>Cachie</h2>
+                        <img src={loading} alt="Loading gif" id="loading-gif" />
+                    </div>
                     <form onChange={handleFormChange} onSubmit={handleSubmit}>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Username</InputLabel>
