@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Cookies from 'js-cookie';
@@ -33,9 +34,13 @@ function Header(props) {
                 </button>
             </header>
             <section id="dropdown-menu" className="dropdown-content">
-                <h5>Account</h5>
+                <Link to={`${props.match.path}/account`} onClick={() => props.setActive('-1')} style={{ textDecoration: 'none' }}>
+                    <h5>Account</h5>
+                </Link>
                 <hr />
-                <h5>Settings</h5>
+                <Link to={`${props.match.path}/setting`} onClick={() => props.setActive('-1')} style={{ textDecoration: 'none' }}>
+                    <h5>Settings</h5>
+                </Link>
                 <hr />
                 <h5 onClick={handleLogout}>Logout</h5>
             </section>

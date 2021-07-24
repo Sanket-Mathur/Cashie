@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Header from '../Components/Header';
 import Sidebar from '../Components/Sidebar';
 import Home from '../Components/Home';
@@ -7,11 +7,23 @@ import Product from '../Components/Product';
 import Category from '../Components/Category';
 import Transaction from '../Components/Transaction';
 import Report from '../Components/Report';
+import Setting from '../Components/Setting';
+import Account from '../Components/Account';
 import { Route, Switch } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import './dashboard.css';
 
 function Dashboard(props) {
     const [active, setActive] = useState('1');
+
+    useEffect(() => {
+        async function checkJWT() {
+            if (!Cookies.get('token') && !localStorage.getItem('token')) {
+                props.history.push("/login");
+            }
+        }
+        checkJWT();
+    });
 
     return (
         <Fragment>
@@ -20,7 +32,7 @@ function Dashboard(props) {
                     <Sidebar id={active} setActive={setActive} {...props} />
                 </div>
                 <div className="content">
-                    <Header className="header-bar" {...props} />
+                    <Header className="header-bar" setActive={setActive} {...props} />
                     <div className="main-area">
                         <Switch>
                             <Route exact path={`${props.match.path}`} component={Home} />
@@ -29,6 +41,8 @@ function Dashboard(props) {
                             <Route exact path={`${props.match.path}/product`} component={Product} />
                             <Route exact path={`${props.match.path}/transaction`} component={Transaction} />
                             <Route exact path={`${props.match.path}/report`} component={Report} />
+                            <Route exact path={`${props.match.path}/setting`} component={Setting} />
+                            <Route exact path={`${props.match.path}/account`} component={Account} />
                         </Switch>
                     </div>
                 </div>

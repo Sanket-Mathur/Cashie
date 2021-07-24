@@ -51,6 +51,7 @@ button {
 .dropdown-content h5 {
     margin: 10px;
     cursor: pointer;
+    color: black;
 }
 .sidebar-label {
     font-size: 11px;
