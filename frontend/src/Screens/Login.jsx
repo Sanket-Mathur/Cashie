@@ -29,7 +29,7 @@ function Login(props) {
         let newFormData = {...formData};
         if (e.target.name === 'username' || e.target.name === 'password') {
             newFormData[e.target.name] = e.target.value;
-        } else if (e.target.value === 'remember') {
+        } else if (e.target.name === 'remember') {
             setRemember(e.target.checked);
         }
         
@@ -58,7 +58,7 @@ function Login(props) {
             gif.style.visibility = 'visible';
 
             let result = await fetch(
-                "https://cashie-backend.herokuapp.com/api/auth/login",
+                `${process.env.REACT_APP_BACKEND_API_URL}auth/login`,
                 {
                     method: "POST",
                     body: JSON.stringify(formData),
@@ -90,7 +90,7 @@ function Login(props) {
             }
         }
         checkJWT();
-    });
+    }, [props.history]);
 
     return (
         <Fragment>
@@ -112,7 +112,7 @@ function Login(props) {
                             <Input name="password" type="password" id="password" autoComplete="current-password" />
                         </FormControl>
                         <FormControlLabel className="mt-4 mb-4" control={
-                            <Checkbox value="remember" color="primary" />
+                            <Checkbox value="remember" name="remember" color="primary" />
                         } label="Remember me" />
                         <Button type="submit" disabled={errors.length !== 0} fullWidth variant="contained" color="primary">Sign in</Button>
                     </form>

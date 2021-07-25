@@ -17,6 +17,7 @@ code {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
 }
 button {
 	background: none;
@@ -110,7 +111,6 @@ button {
     border-radius: 20px;
 }
 .form h2 {
-    font-family: "Roboto";
     font-weight: 900;
     color: #D54D81;
     margin: 0;
@@ -130,4 +130,31 @@ button {
     bottom: 10px;
     right: 10px;
     width: 410px;
+}
+.dashboard-container {
+    padding: 50px 40px;
+}
+.dashboard-container h4 {
+    color: #4d4d4d;
+    font-weight: 900;
+}
+.dashboard-data {
+    padding: 20px;
+    border-radius: 20px !important;
+}
+.dashboard-data h1 {
+    color: white;
+    font-weight: 900;
+}
+.dashboard-data h6 {
+    color: white;
+}
+.redCard {
+    background: linear-gradient(16deg, rgba(234,81,121,1) 0%, rgba(172,54,115,1) 100%);
+}
+.indigoCard {
+	background: linear-gradient(16deg, rgba(195, 84, 215, 1) 0%, rgba(136, 74, 206, 1) 100%);
+}
+.orangeCard {
+	background: linear-gradient(16deg, rgba(245, 90, 158, 1) 0%, rgba(255, 155, 106, 1) 100%);
 }
