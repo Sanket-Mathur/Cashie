@@ -23,16 +23,18 @@ function Dashboard(props) {
             }
         }
         checkJWT();
-    });
+    }, [props.history]);
 
     return (
         <Fragment>
             <div className="dashboard">
-                <div className="side-wrap">
+                <div className="side-wrap side-wrap-hold"></div>
+                <div className="side-wrap side-bar">
                     <Sidebar id={active} setActive={setActive} {...props} />
                 </div>
                 <div className="content">
                     <Header className="header-bar" setActive={setActive} {...props} />
+                    <div className="header-hold"></div>
                     <div className="main-area">
                         <Switch>
                             <Route exact path={`${props.match.path}`} component={Home} />

@@ -16,9 +16,14 @@ code {
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
     font-family: "Roboto", sans-serif;
 }
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
 button {
 	background: none;
 	color: inherit;
@@ -139,6 +144,8 @@ button {
     font-weight: 900;
 }
 .dashboard-data {
+    position: relative;
+    overflow: hidden;
     padding: 20px;
     border-radius: 20px !important;
 }
@@ -157,4 +164,18 @@ button {
 }
 .orangeCard {
 	background: linear-gradient(16deg, rgba(245, 90, 158, 1) 0%, rgba(255, 155, 106, 1) 100%);
+}
+.chart, .table {
+    overflow: scroll;
+    height: 400px;
+    border-radius: 20px !important;
+    padding: 30px;
+}
+.card-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: white;
+    opacity: .6;
+    transform: scale(5) translate(-40%, 35%);
 }

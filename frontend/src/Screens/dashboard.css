@@ -3,10 +3,24 @@
 }
 .side-wrap {
     width: 95px;
-    height: 100vh;
+    height: 100%;
     background: #303456;
+}
+.side-wrap-hold {
+    min-width: 95px;
+}
+.side-bar {
+    position: fixed;
 }
 .content {
     width: 100vw;
+    height: 100vh;
     background: #f1f1f1;
+}
+.header-bar {
+    position: fixed;
+    width: calc(100vw - 95px);
+}
+.header-hold {
+    height: 50px;
 }
