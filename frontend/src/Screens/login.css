@@ -1,0 +1,51 @@
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-size: cover;
+}
+.login-title {
+    display: flex;
+    justify-content: space-between;
+}
+.login-title img {
+    height: 40px;
+    visibility: hidden;
+}
+.form {
+    position: relative;
+    width: 500px;
+    padding: 50px;
+}
+.form .screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #ddd;
+    opacity: 0.3;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+}
+.form h2 {
+    font-weight: 900;
+    color: #D54D81;
+    margin: 0;
+    position: relative;
+}
+.form form {
+    position: relative;
+}
+.login-logo {
+    position: absolute;
+    height: 80px;
+    top: 30px;
+    left: 30px;
+}
+.error {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 410px;
+}

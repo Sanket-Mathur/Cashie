@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 import loginBackground from '../Images/login-background.jpg';
 import logo from '../Images/logo.png';
 import loading from '../Images/loading.gif';
+import './login.css'
 
 function Login(props) {
     const [formData, setFormData] = useState({
