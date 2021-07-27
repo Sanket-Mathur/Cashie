@@ -90,13 +90,6 @@ button {
 .sidebar-links.active {
     background: #EA5179;
 }
-.dashboard-container {
-    padding: 50px 40px;
-}
-.dashboard-container h4 {
-    color: #4d4d4d;
-    font-weight: 900;
-}
 .dashboard-data {
     position: relative;
     overflow: hidden;
@@ -154,4 +147,20 @@ button {
 }
 .setting-data {
     border-radius: 20px !important;
+}
+.user-heading {
+    display: flex;
+    justify-content: space-between;
+}
+.user-newdata {
+    background: #EA5179 !important;
+    border-radius: 20px !important;
+    text-transform: capitalize !important;
+    color: white !important;
+}
+.user-input .MuiInputBase-root {
+    background: white;
+}
+.user-form {
+    display: flex;
 }

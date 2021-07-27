@@ -3,6 +3,7 @@ import Header from '../Components/Header';
 import Sidebar from '../Components/Sidebar';
 import Home from '../Components/Home';
 import User from '../Components/User';
+import UserForm from '../Components/UserForm';
 import Product from '../Components/Product';
 import Category from '../Components/Category';
 import Transaction from '../Components/Transaction';
@@ -39,6 +40,7 @@ function Dashboard(props) {
                         <Switch>
                             <Route exact path={`${props.match.path}`} component={Home} />
                             <Route exact path={`${props.match.path}/user`} component={User} />
+                            <Route exact path={`${props.match.path}/user/new`} component={UserForm} />
                             <Route exact path={`${props.match.path}/category`} component={Category} />
                             <Route exact path={`${props.match.path}/product`} component={Product} />
                             <Route exact path={`${props.match.path}/transaction`} component={Transaction} />
