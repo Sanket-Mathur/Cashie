@@ -6,6 +6,7 @@ import User from '../Components/User';
 import UserForm from '../Components/UserForm';
 import Product from '../Components/Product';
 import Category from '../Components/Category';
+import CategoryForm from '../Components/CategoryForm';
 import Transaction from '../Components/Transaction';
 import Report from '../Components/Report';
 import Setting from '../Components/Setting';
@@ -40,8 +41,9 @@ function Dashboard(props) {
                         <Switch>
                             <Route exact path={`${props.match.path}`} component={Home} />
                             <Route exact path={`${props.match.path}/user`} component={User} />
-                            <Route exact path={`${props.match.path}/user/new`} component={UserForm} />
+                            <Route exact path={`${props.match.path}/user/create`} component={UserForm} />
                             <Route exact path={`${props.match.path}/category`} component={Category} />
+                            <Route exact path={`${props.match.path}/category/create`} component={CategoryForm} />
                             <Route exact path={`${props.match.path}/product`} component={Product} />
                             <Route exact path={`${props.match.path}/transaction`} component={Transaction} />
                             <Route exact path={`${props.match.path}/report`} component={Report} />

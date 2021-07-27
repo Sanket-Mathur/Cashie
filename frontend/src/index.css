@@ -164,3 +164,7 @@ button {
 .user-form {
     display: flex;
 }
+.back-icon:hover {
+    background: #ddd;
+    border-radius: 50%;
+}

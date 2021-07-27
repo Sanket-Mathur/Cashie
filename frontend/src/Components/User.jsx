@@ -26,7 +26,7 @@ function User(props) {
             <div className="dashboard-container text-start">
                 <div className="user-heading">
                     <h4>Users List</h4>
-                    <Link to={`${props.match.path}/new`} style={{ textDecoration: 'none' }}>
+                    <Link to={`${props.match.path}/create`} style={{ textDecoration: 'none' }}>
                         <Button variant="contained" className="user-newdata">+ New Data</Button>
                     </Link>
                 </div>
@@ -39,10 +39,10 @@ function User(props) {
                         <section>
                             <p className="setting-content">Role</p>
                             <FormControl variant="filled" className="setting-input me-4 user-input">
-                                <Select native label="Role" placeholder="Role" disableUnderline inputProps={{ name: "role", shrink: false }}>
+                                <Select native label="Role" placeholder="Role" disableUnderline inputProps={{ name: "role" }}>
                                     <option value="all">All Roles</option>
                                     <option value="admin">Admin</option>
-                                    <option value="cashier">Cahier</option>
+                                    <option value="cashier">Cashier</option>
                                 </Select>
                             </FormControl>
                         </section>
@@ -60,48 +60,44 @@ function User(props) {
                     </form>
                 </Grid>
                 <Grid container className="mt-4">
-					<Grid item xs={12}>
-						<Paper>
-							<Table aria-label="simple table">
-								<TableHead>
-									<TableRow>
-										<TableCell>Full Name</TableCell>
-										<TableCell align="right">Username</TableCell>
-										<TableCell align="right">Role</TableCell>
-										<TableCell align="right">Last Active</TableCell>
-										<TableCell align="right">Actions</TableCell>
-									</TableRow>
-								</TableHead>
-								<TableBody>
-									{ users && users.map((user) => (
-										<TableRow key={user._id}>
-											<TableCell component="th" scope="user">
-												{user.fullname}
-											</TableCell>
-											<TableCell align="right">{user.username}</TableCell>
-											<TableCell align="right">
-												<Chip
-													variant="outline"
-													label={user.role}
-													color="secondary"
-												/>
-											</TableCell>
-											<TableCell align="right">
-												{moment(user.lastActive).format("llll")}
-											</TableCell>
-											<TableCell align="right">
-												<Link to={`${props.match.path}/update/${user._id}`}>
-													<EditIcon />
-												</Link>
-												<DeleteIcon />
-											</TableCell>
-										</TableRow>
-									))}
-								</TableBody>
-							</Table>
-						</Paper>
-					</Grid>
-				</Grid>
+                    <Grid item xs={12}>
+                        <Paper>
+                            <Table aria-label="simple table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Full Name</TableCell>
+                                        <TableCell align="right">Username</TableCell>
+                                        <TableCell align="right">Role</TableCell>
+                                        <TableCell align="right">Last Active</TableCell>
+                                        <TableCell align="right">Actions</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    { users && users.map((user) => (
+                                        <TableRow key={user._id}>
+                                            <TableCell component="th" scope="user">
+                                                {user.fullname}
+                                            </TableCell>
+                                            <TableCell align="right">{user.username}</TableCell>
+                                            <TableCell align="right">
+                                                <Chip variant="outline" label={user.role} color="secondary" />
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                {moment(user.lastActive).format("llll")}
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Link to={`${props.match.path}/update/${user._id}`}>
+                                                    <EditIcon />
+                                                </Link>
+                                                <DeleteIcon />
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </Paper>
+                    </Grid>
+                </Grid>
             </div>
         </Fragment>
     )
