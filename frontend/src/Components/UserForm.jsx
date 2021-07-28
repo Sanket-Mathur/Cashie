@@ -85,15 +85,16 @@ function UserForm(props) {
                     fullname: response.data.fullname,
                     username: response.data.username,
                     email: response.data.email,
-                    role: response.data.role
+                    role: response.data.role,
+                    password: ''
                 });
             }
         }
-        if (params) {
+        if (params.id) {
             setMethod('PUT');
             getValues(params.id);
         }
-    }, [params]);
+    }, [params.id]);
 
     return (
         <Fragment>

@@ -72,8 +72,10 @@ function Login(props) {
             if (data.status === "success") {
                 if (remember) {
                     localStorage.setItem("token", data.token);
+                    localStorage.setItem("id", data.user._id);
                 } else {
                     Cookies.set("token", data.token, { expires: 1 });
+                    Cookies.set("id", data.user._id, { expires: 1 });
                 }
 				props.history.push("/admin");
             } else {
