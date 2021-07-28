@@ -168,3 +168,6 @@ button {
     background: #ddd;
     border-radius: 50%;
 }
+.delete-icon {
+    color: red;
+}

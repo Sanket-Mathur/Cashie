@@ -37,7 +37,7 @@ function Category(props) {
                         <section>
                             <p className="setting-content">Sort By</p>
                             <FormControl variant="filled" className="setting-input user-input">
-                                <Select native placeholder="Role" disableUnderline inputProps={{ name: "sort", shrink: false }}>
+                                <Select native placeholder="Role" disableUnderline inputProps={{ name: "sort" }}>
                                     <option value="Newest">Newest</option>
                                     <option value="Oldest">Oldest</option>
                                     <option value="Name">Name</option>

@@ -2,8 +2,6 @@ import React, { useState, Fragment } from 'react';
 import { Grid, Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 function CategoryForm(props) {
