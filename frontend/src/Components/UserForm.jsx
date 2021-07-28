@@ -42,10 +42,10 @@ function UserForm(props) {
         } else {
             setErrors([]);
         }
-    }
+    };
     const handleBackwards = () => {
         props.history.goBack();
-    }
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -89,11 +89,11 @@ function UserForm(props) {
                 });
             }
         }
-        if (params.id) {
+        if (params) {
             setMethod('PUT');
             getValues(params.id);
         }
-    }, [params.id]);
+    }, [params]);
 
     return (
         <Fragment>

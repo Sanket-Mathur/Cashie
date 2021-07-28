@@ -1,5 +1,8 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from "react-router-dom";
+import axios from "axios";
+import queryString from "query-string";
+import Swal from 'sweetalert2';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -18,6 +21,47 @@ import EditIcon from "@material-ui/icons/Edit";
 
 function Category(props) {
     const [categories, setCategories] = useState(null);
+    const [query, setQuery] = useState({
+		limit: 20,
+	});
+    const [refresh, setRefresh] = useState(false);
+
+    const handleDelete = (id) => {
+        Swal.fire({
+			title: "Are you sure?",
+			text: "This user will be deleted!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Delete",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				axios
+					.delete(`${process.env.REACT_APP_BACKEND_API_URL}category/${id}`)
+					.then((res) => {
+                        console.log(res);
+						if (res.data.status === "success") {
+							Swal.fire("Deleted!", "User deleted successfully...", "success");
+							setRefresh(!refresh);
+						}
+					})
+					.catch((err) => {
+						Swal.fire("Deleted!", "Something went wrong...", "error");
+					});
+			}
+		});
+    };
+    const handleQueryChange = (e) => {
+		setCategories(null);
+		setQuery({ ...query, [e.target.name]: e.target.value });
+	};
+
+    useEffect(() => {
+		axios(
+			`${process.env.REACT_APP_BACKEND_API_URL}category?${queryString.stringify(query)}`,
+		).then((result) => setCategories(result.data.data.categories))
+    }, [refresh, query]);
 
     return (
         <Fragment>
@@ -29,7 +73,7 @@ function Category(props) {
                     </Link>
                 </div>
                 <Grid container justifyContent="flex-end" className="my-3">
-                    <form className="user-form">
+                    <form onChange={handleQueryChange} className="user-form">
                         <section>
                             <p className="setting-content">Search</p>
                             <TextField placeholder="Keyword" name="keyword" className="setting-input user-input me-4" InputProps={{ disableUnderline: true, endAdornment: (<InputAdornment position="start"><SearchIcon /></InputAdornment>) }} variant="filled" />
@@ -67,7 +111,7 @@ function Category(props) {
                                                 <Link to={`${props.match.path}/update/${category._id}`}>
                                                     <EditIcon />
                                                 </Link>
-                                                <DeleteIcon />
+                                                <DeleteIcon onClick={() => handleDelete(category._id)} className="delete-icon" />
                                             </TableCell>
                                         </TableRow>
                                     ))}
