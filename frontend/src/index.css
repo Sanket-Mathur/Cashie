@@ -131,7 +131,7 @@ button {
     margin-bottom: 2px;
 }
 .setting-input .MuiFilledInput-root {
-    border-radius: 50px;
+    border-radius: 30px;
 }
 .setting-input .MuiInputBase-input {
     padding: 15px;
@@ -170,4 +170,7 @@ button {
 }
 .delete-icon {
     color: red;
+}
+.image-btn {
+    width: 150px;
 }

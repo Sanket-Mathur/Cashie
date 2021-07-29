@@ -5,6 +5,7 @@ import Home from '../Components/Home';
 import User from '../Components/User';
 import UserForm from '../Components/UserForm';
 import Product from '../Components/Product';
+import ProductForm from '../Components/ProductForm';
 import Category from '../Components/Category';
 import CategoryForm from '../Components/CategoryForm';
 import Transaction from '../Components/Transaction';
@@ -47,6 +48,8 @@ function Dashboard(props) {
                             <Route exact path={`${props.match.path}/category/create`} component={CategoryForm} />
                             <Route exact path={`${props.match.path}/category/update/:id`} component={CategoryForm} />
                             <Route exact path={`${props.match.path}/product`} component={Product} />
+                            <Route exact path={`${props.match.path}/product/create`} component={ProductForm} />
+                            <Route exact path={`${props.match.path}/product/update/:id`} component={ProductForm} />
                             <Route exact path={`${props.match.path}/transaction`} component={Transaction} />
                             <Route exact path={`${props.match.path}/report`} component={Report} />
                             <Route exact path={`${props.match.path}/setting`} component={Setting} />
