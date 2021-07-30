@@ -1,11 +1,100 @@
-import React from 'react'
+import React, { useState, useEffect, Fragment } from 'react';
+import moment from 'moment';
+import queryString from 'query-string';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 function Report() {
+    const [weeklyTransactions, setWeeklyTransactions] = useState([]);
+    const [queryData, setQueryData] = useState({
+		start: moment().startOf("week"),
+		end: moment().endOf("week"),
+		limit: 20,
+	});
+
+    let query = queryString.stringify(queryData);
+
+    const handleQueryChange = (e) => {
+        setQueryData({ ...queryData, [e.target.name]: e.target.value });
+    };
+
+    useEffect(() => {
+		async function getWeeklyTransaction() {
+			let result = await fetch(
+				`${process.env.REACT_APP_BACKEND_API_URL}transaction?${query}`,
+			);
+			let data = await result.json();
+			setWeeklyTransactions(data.data.transactions);
+		}
+		getWeeklyTransaction();
+	}, [query]);
+
     return (
-        <div>
-            <h1>Report</h1>
-        </div>
+        <Fragment>
+            <div className="dashboard-container text-start">
+                <h4>Report</h4>
+                <Grid container justifyContent="flex-end" className="my-3">
+                    <form onChange={handleQueryChange} className="user-form">
+                        <section>
+                            <p className="setting-content">Start</p>
+                            <TextField type="date" name="start" value={queryData.start && queryData.start.format("YYYY-MM-DD")} className="setting-input user-input me-4" InputProps={{ disableUnderline: true }} variant="filled" />
+                        </section>
+                        <section>
+                            <p className="setting-content">End</p>
+                            <TextField type="date" name="end" value={queryData.end && queryData.end.format("YYYY-MM-DD")} className="setting-input user-input me-4" InputProps={{ disableUnderline: true }} variant="filled" />
+                        </section>
+                        <section>
+                            <p className="setting-content">Sort By</p>
+                            <FormControl variant="filled" className="setting-input user-input">
+                                <Select native placeholder="Role" disableUnderline inputProps={{ name: "sort" }}>
+                                    <option value="Newest">Newest</option>
+                                    <option value="Oldest">Oldest</option>
+                                </Select>
+                            </FormControl>
+                        </section>
+                    </form>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <Paper>
+                            <Table className="text-start mt-3" aria-label="simple table">
+								<TableHead>
+									<TableRow>
+										<TableCell>Reciept no</TableCell>
+										<TableCell align="right">Date</TableCell>
+										<TableCell align="right">Quantity</TableCell>
+										<TableCell align="right">Total</TableCell>
+									</TableRow>
+								</TableHead>
+								<TableBody>
+									{ weeklyTransactions && weeklyTransactions.map((row) => (
+										<TableRow key={row._id}>
+											<TableCell component="th" scope="row">
+												{row._id}
+											</TableCell>
+											<TableCell align="right">
+												{moment(row._createdAt).format("LLL")}
+											</TableCell>
+											<TableCell align="right">{row.items.length}</TableCell>
+											<TableCell align="right">{row.grandtotal}</TableCell>
+										</TableRow>
+									))}
+								</TableBody>
+							</Table>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </div>
+        </Fragment>
     )
 }
 
-export default Report
+export default Report;
