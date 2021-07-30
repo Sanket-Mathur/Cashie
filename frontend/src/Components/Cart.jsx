@@ -6,6 +6,7 @@ import TableRow from "@material-ui/core/TableRow";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import Button from "@material-ui/core/Button";
 import { CartContext, SettingsContext } from "../App";
 
 function Cart() {
@@ -71,6 +72,14 @@ function Cart() {
                     </TableRow>
                 </TableBody>
             </Table>
+            <section style={{ display: "flex" }}>
+            <section style={{ width: '50%', padding: '5px' }}>
+                <Button variant="contained" className="reset-button" fullWidth onClick={cartDetails.handleReset}>Reset</Button>
+            </section>
+            <section style={{ width: '50%', padding: '5px' }}>
+                <Button variant="contained" className="user-newdata" fullWidth disabled={grandTotal === 0} onClick={() => cartDetails.handleSubmit(grandTotal.toFixed(2))}>Pay</Button>
+            </section>
+            </section>
         </Fragment>
     );
 }

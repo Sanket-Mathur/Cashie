@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import Dashboard from './Screens/Dashboard';
 import Login from './Screens/Login';
 import { Route, Switch, Redirect } from 'react-router-dom';
@@ -29,7 +30,6 @@ function App() {
         setCartItems(newCartItems);
     };
     const handleSelection = (id) => {
-        console.log(allProducts)
         let index = cartItems.findIndex((item) => item._id === id);
         if (index === -1) {
             let product = allProducts.find((p) => p._id === id);
@@ -42,6 +42,31 @@ function App() {
             setCartItems(newCartItems);
         }
     };
+    const handleSubmit = (grandTotal) => {
+        let data = {
+            items: cartItems,
+            grandtotal: grandTotal
+        };
+        axios({
+            method: "POST",
+            url: `${process.env.REACT_APP_BACKEND_API_URL}transaction`,
+            data: data,
+        }).then((result) => {
+            console.log(result);
+            if (result.data.status === "success") {
+                Swal.fire(
+                    "Purchased successfully",
+                );
+            } else {
+                Swal.fire("Error", "Something went wrong", "error");
+            }
+        }).catch((err) => {
+            Swal.fire("Error", "Something went wrong", "error");
+        });
+    };
+    const handleReset = () => {
+        setCartItems([]);
+    }
 
     useEffect(() => {
         axios(`${process.env.REACT_APP_BACKEND_API_URL}product?limit=100000`).then((result) =>
@@ -52,7 +77,7 @@ function App() {
 
     return (
         <div className="App">
-            <CartContext.Provider value = {{ cartItems, handleCartDelete, handleQtyChange, handleSelection }}>
+            <CartContext.Provider value = {{ cartItems, handleCartDelete, handleQtyChange, handleSelection, handleSubmit, handleReset }}>
                 <SettingsContext.Provider value={storeSettings}>
                     <Switch>
                         <Route path="/admin" component={Dashboard} />

@@ -187,3 +187,7 @@ button {
 .pink {
     color: #EA5179;
 }
+.reset-button {
+    border-radius: 20px !important;
+    text-transform: capitalize !important;
+}

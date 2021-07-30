@@ -80,11 +80,11 @@ function Transaction() {
                                             <CardActionArea>
                                                 <CardMedia component="img" alt={product.description} height="100" image={product.image} title={product.name} />
                                                 <CardContent>
-                                                    <Typography gutterBottom variant="p" component="h6">
+                                                    <Typography gutterBottom component="h6">
                                                         {product.name}
                                                     </Typography>
                                                 </CardContent>
-                                                <Typography gutterBottom variant="p" component="h6" className="pink">
+                                                <Typography gutterBottom component="h6" className="pink">
                                                     $ &nbsp;{product.price}
                                                 </Typography>
                                             </CardActionArea>
@@ -100,11 +100,11 @@ function Transaction() {
                                                     <CardActionArea>
                                                         <CardMedia component="img" alt={product.description} height="100" image={product.image} title={product.name} />
                                                         <CardContent>
-                                                            <Typography gutterBottom variant="p" component="h6">
+                                                            <Typography gutterBottom component="h6">
                                                                 {product.name}
                                                             </Typography>
                                                         </CardContent>
-                                                        <Typography gutterBottom variant="p" component="h6" className="pink">
+                                                        <Typography gutterBottom component="h6" className="pink">
                                                             $ &nbsp;{product.price}
                                                         </Typography>
                                                     </CardActionArea>
