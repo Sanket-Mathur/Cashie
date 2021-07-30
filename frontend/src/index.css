@@ -174,3 +174,16 @@ button {
 .image-btn {
     width: 150px;
 }
+.transaction-product-card {
+    margin: 5px;
+    width: 150px;
+    padding: 10px;
+    border: 1px gray solid;
+}
+.cart-table .MuiTableCell-root {
+    padding: 5px;
+    border-bottom: 0;
+}
+.pink {
+    color: #EA5179;
+}
