@@ -23,7 +23,12 @@ function Report() {
     let query = queryString.stringify(queryData);
 
     const handleQueryChange = (e) => {
-        setQueryData({ ...queryData, [e.target.name]: e.target.value });
+        if (e.target.name === "start" || e.target.name === "end") {
+            let date = moment(e.target.value, "YYYY-MM-DD");
+            setQueryData({ ...queryData, [e.target.name]: date });
+        } else {
+            setQueryData({ ...queryData, [e.target.name]: e.target.value });
+        }
     };
 
     useEffect(() => {
