@@ -45,10 +45,10 @@ function Account() {
         }
 
         let id = '';
-        if (Cookies.get('id')) {
-            id = Cookies.get('id');
-        } else if (localStorage.getItem('id')) {
-            id = localStorage.getItem('id');
+        if (Cookies.get('user')) {
+            id = JSON.parse(Cookies.get('user'))._id;
+        } else if (localStorage.getItem('user')) {
+            id = JSON.parse(localStorage.getItem('user'))._id;
         }
 
         axios({
@@ -71,10 +71,10 @@ function Account() {
 
     useEffect(() => {
         let id = '';
-        if (Cookies.get('id')) {
-            id = Cookies.get('id');
-        } else if (localStorage.getItem('id')) {
-            id = localStorage.getItem('id');
+        if (Cookies.get('user')) {
+            id = JSON.parse(Cookies.get('user'))._id;
+        } else if (localStorage.getItem('user')) {
+            id = JSON.parse(localStorage.getItem('user'))._id;
         }
 
         async function getValues() {

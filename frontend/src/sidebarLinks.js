@@ -5,7 +5,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 
-const sidebarLinks = [
+const sidebarLinksAdmin = [
     { id: '1', label: 'Dashboard', icon: <HomeIcon />, page: '' },
     { id: '2', label: 'User', icon: <PeopleAltIcon />, page: 'user' },
     { id: '3', label: 'Category', icon: <CategoryIcon />, page: 'category' },
@@ -14,4 +14,10 @@ const sidebarLinks = [
     { id: '6', label: 'Report', icon: <AssessmentIcon />, page: 'report'}
 ];
 
-export default sidebarLinks;
+const sidebarLinksCashier = [
+    { id: '1', label: 'Dashboard', icon: <HomeIcon />, page: '' },
+    { id: '4', label: 'Product', icon: <LayersIcon />, page: 'product' },
+    { id: '5', label: 'Transaction', icon: <ReceiptIcon />, page: 'transaction' },
+];
+
+export { sidebarLinksAdmin, sidebarLinksCashier };
