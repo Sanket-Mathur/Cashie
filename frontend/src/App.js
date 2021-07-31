@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Dashboard from './Screens/Dashboard';
 import Login from './Screens/Login';
+import ReceiptModel from './Components/ReceiptModel';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 export const CartContext = createContext();
@@ -13,6 +14,13 @@ function App() {
     const [cartItems, setCartItems] = useState([]);
     const [allProducts, setAllProducts] = useState(null);
     const [storeSettings, setStoreSettings] = useState(null);
+    const [receiptModel, setReceiptModel] = useState(false);
+    const [transactionData, setTransactionData] = useState(null);
+
+    const subTotal = cartItems.length && cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const discount = storeSettings ? (+storeSettings.discount / 100) * subTotal : 0;
+    const tax = storeSettings ? (+storeSettings.tax / 100) * subTotal : 0;
+    const grandTotal = subTotal + tax - discount;
 
     const handleQtyChange = (id, type) => {
         let index = cartItems.findIndex((item) => item._id === id);
@@ -42,21 +50,22 @@ function App() {
             setCartItems(newCartItems);
         }
     };
-    const handleSubmit = (grandTotal) => {
+    const handleSubmit = () => {
         let data = {
             items: cartItems,
-            grandtotal: grandTotal
+            subtotal: subTotal,
+            grandtotal: grandTotal,
+            discount
         };
         axios({
             method: "POST",
             url: `${process.env.REACT_APP_BACKEND_API_URL}transaction`,
             data: data,
         }).then((result) => {
-            console.log(result);
             if (result.data.status === "success") {
-                Swal.fire(
-                    "Purchased successfully",
-                );
+                setCartItems([]);
+                setReceiptModel(true);
+                setTransactionData(result.data.data);
             } else {
                 Swal.fire("Error", "Something went wrong", "error");
             }
@@ -66,7 +75,15 @@ function App() {
     };
     const handleReset = () => {
         setCartItems([]);
-    }
+    };
+    const handleOpen = (transaction) => {
+        console.log("yay");
+        setTransactionData(transaction);
+        setReceiptModel(true);
+    };
+    const handleClose = () => {
+        setReceiptModel(false);
+    };
 
     useEffect(() => {
         axios(`${process.env.REACT_APP_BACKEND_API_URL}product?limit=100000`).then((result) =>
@@ -77,7 +94,7 @@ function App() {
 
     return (
         <div className="App">
-            <CartContext.Provider value = {{ cartItems, handleCartDelete, handleQtyChange, handleSelection, handleSubmit, handleReset }}>
+            <CartContext.Provider value = {{ cartItems, handleCartDelete, handleQtyChange, handleSelection, handleSubmit, handleReset, handleOpen }}>
                 <SettingsContext.Provider value={storeSettings}>
                     <Switch>
                         <Route path="/admin" component={Dashboard} />
@@ -86,6 +103,7 @@ function App() {
                     </Switch>
                 </SettingsContext.Provider>
             </CartContext.Provider>
+            <ReceiptModel isOpen={receiptModel} onClose={handleClose} onOpen={handleOpen} transactionData={transactionData}/>
         </div>
     );
 }

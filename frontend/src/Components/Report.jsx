@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, useContext, Fragment } from 'react';
 import moment from 'moment';
 import queryString from 'query-string';
 import Grid from '@material-ui/core/Grid';
@@ -11,8 +11,14 @@ import TableRow from "@material-ui/core/TableRow";
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import Button from '@material-ui/core/Button';
+import { CartContext } from "../App";
+
 
 function Report() {
+    const cartDetails = useContext(CartContext);
+
     const [weeklyTransactions, setWeeklyTransactions] = useState([]);
     const [queryData, setQueryData] = useState({
 		start: moment().startOf("week"),
@@ -77,6 +83,7 @@ function Report() {
 										<TableCell align="right">Date</TableCell>
 										<TableCell align="right">Quantity</TableCell>
 										<TableCell align="right">Total</TableCell>
+										<TableCell></TableCell>
 									</TableRow>
 								</TableHead>
 								<TableBody>
@@ -89,7 +96,8 @@ function Report() {
 												{moment(row._createdAt).format("LLL")}
 											</TableCell>
 											<TableCell align="right">{row.items.length}</TableCell>
-											<TableCell align="right">{row.grandtotal}</TableCell>
+											<TableCell align="right">{row.grandtotal.toFixed(2)}</TableCell>
+                                            <TableCell align="right"><Button onClick={ () => cartDetails.handleOpen(row) }><VisibilityIcon /></Button></TableCell>
 										</TableRow>
 									))}
 								</TableBody>

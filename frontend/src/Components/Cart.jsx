@@ -74,10 +74,10 @@ function Cart() {
             </Table>
             <section style={{ display: "flex" }}>
             <section style={{ width: '50%', padding: '5px' }}>
-                <Button variant="contained" className="reset-button" fullWidth onClick={cartDetails.handleReset}>Reset</Button>
+                <Button variant="contained" className="reset-button" fullWidth disabled={cartDetails.cartItems.length === 0} onClick={cartDetails.handleReset}>Reset</Button>
             </section>
             <section style={{ width: '50%', padding: '5px' }}>
-                <Button variant="contained" className="user-newdata" fullWidth disabled={grandTotal === 0} onClick={() => cartDetails.handleSubmit(grandTotal.toFixed(2))}>Pay</Button>
+                <Button variant="contained" className="user-newdata" fullWidth disabled={cartDetails.cartItems.length === 0} onClick={() => cartDetails.handleSubmit(grandTotal.toFixed(2))}>Pay</Button>
             </section>
             </section>
         </Fragment>

@@ -134,7 +134,7 @@ function Home(props) {
 													{moment(row._createdAt).format("LLL")}
 												</TableCell>
 												<TableCell align="right">{row.items.length}</TableCell>
-												<TableCell align="right">{row.grandtotal}</TableCell>
+												<TableCell align="right">{row.grandtotal.toFixed(2)}</TableCell>
 											</TableRow>
 										))}
 								</TableBody>
